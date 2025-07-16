@@ -1,85 +1,127 @@
+/* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #46cfb8;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
     margin: 0;
     padding: 20px;
     color: #333;
 }
 
+/* Main Title */
 h1 {
     text-align: center;
-    color: #0088cc;
+    color: #082d3f;
     margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 0.5px;
 }
 
+/* General Button */
 button {
-    background-color: #0088cc;
+    background-color: #1e221e;
     color: white;
     border: none;
-    padding: 8px 14px;
+    padding: 10px 18px;
     margin: 4px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #0072a3;
+    transform: scale(1.03);
 }
 
+/* Chat Message Card */
 .chat {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+    background-color: #e1ecc8;
+    border: 3px solid #000000;
     padding: 20px;
     border-radius: 12px;
-    margin: 10px auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     width: 80%;
+    transition: transform 0.3s ease;
 }
 
+.chat:hover {
+    transform: translateY(-4px);
+}
+
+/* Chat message body */
 .msg {
-    background-color: #dcf8c6;
-    padding: 12px;
+    background-color: #99d36c;
+    padding: 14px;
     margin: 10px 0;
     border-radius: 8px;
     font-size: 16px;
+    line-height: 1.4;
+    border: 2px solid #000000;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 }
 
+/* Inline Form */
 form {
     display: inline;
 }
 
+/* Paragraph Styles */
 p {
     margin: 5px 0;
 }
 
-input, textarea {
-    padding: 8px;
-    border-radius: 6px;
+/* Inputs & Textareas */
+input,
+textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    width: 80%;
+    width: 100%;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #0088cc;
+    box-shadow: 0 0 5px rgba(0, 136, 204, 0.3);
+    outline: none;
 }
 
 textarea {
-    height: 80px;
+    min-height: 100px;
     resize: vertical;
 }
 
+/* Edit Chat Container */
 .edit-container {
-    background-color: #ffffff;
+    background-color: #e1ecc8;
     padding: 30px;
     margin: 20px auto;
-    border-radius: 12px;
+    border-radius: 14px;
     width: 80%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.edit-container:hover {
+    transform: translateY(-3px);
 }
 
 .edit-container h2 {
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    font-size: 22px;
+    border-bottom: 2px solid #0088cc;
+    padding-bottom: 8px;
 }
 
 .edit-container p {
@@ -91,32 +133,35 @@ textarea {
 .edit-container form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
+    gap: 12px;
+}               
 
 .edit-container textarea {
-    padding: 12px;
+    padding: 14px;
     font-size: 15px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 2px solid #0e0b0b;
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
+    background-color: #99d36c;
 }
 
+/* Button in Edit Container */
 .edit-container button {
     width: fit-content;
-    padding: 8px 16px;
-    background-color: #0088cc;
+    padding: 10px 20px;
+    background-color: #1e221e;
     color: white;
     border: none;
     border-radius: 6px;
     font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .edit-container button:hover {
-    background-color: #0071a1;
+    background-color: #006f9a;
+    transform: scale(1.03);
 }
-
-
-

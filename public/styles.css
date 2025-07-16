@@ -1,64 +1,85 @@
-/* Make body a flex container to center contents */
+/* Centering everything in the page */
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     display: flex;
-    justify-content: center;  /* center horizontally */
-    align-items: center;      /* center vertically */
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Chat form container */
+/* Container for the new chat form */
 .new-chat {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #e1ecc8;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
+    transition: transform 0.3s ease;
 }
 
-/* Heading styling */
+.new-chat:hover {
+    transform: translateY(-5px);
+}
+
+/* Heading */
 .new-chat h3 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 25px;
+    font-size: 22px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    border-bottom: 2px solid #277aae;
+    padding-bottom: 10px;
 }
 
-/* Input and textarea styling */
-.new-chat input, .new-chat textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-}
-
-/* Textarea specific tweaks */
+/* Input and textarea styles */
+.new-chat input,
 .new-chat textarea {
-    height: 120px;
-    resize: vertical;
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #99d36c;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Button styling */
+/* Focus effect */
+.new-chat input:focus,
+.new-chat textarea:focus {
+    border-color: #277aae;
+    outline: none;
+    box-shadow: 0 0 5px rgba(39, 122, 174, 0.5);
+}
+
+/* Textarea size */
+.new-chat textarea {
+    height: 130px;
+    resize: vertical;
+    background-color: #99d36c;
+}
+
+/* Button style */
 .new-chat button {
     width: 100%;
-    background-color: #277aae;
+    background-color: #1e221e;
     color: white;
-    padding: 12px;
+    padding: 14px;
     border: none;
     font-size: 16px;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .new-chat button:hover {
-    background-color: #219150;
+    background-color: #1f5f89;
+    transform: scale(1.02);
 }
