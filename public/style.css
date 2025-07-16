@@ -1,0 +1,122 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #0088cc;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0072a3;
+}
+
+.chat {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 10px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    width: 80%;
+}
+
+.msg {
+    background-color: #dcf8c6;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+form {
+    display: inline;
+}
+
+p {
+    margin: 5px 0;
+}
+
+input, textarea {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 80%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.edit-container {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 12px;
+    width: 80%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.edit-container h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.edit-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.edit-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-container textarea {
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.edit-container button {
+    width: fit-content;
+    padding: 8px 16px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.edit-container button:hover {
+    background-color: #0071a1;
+}
+
+
+
