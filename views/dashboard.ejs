@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Mini WhatsApp</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dashboard-box {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #e1ecc8;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 3px solid #000000;
+        }
+
+        .user-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            background-color: #99d36c;
+        }
+
+        .user-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .chat-btn {
+            background-color: #075E54;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #e5ddd5;">
+    <div class="dashboard-box">
+        <h2>Welcome, <%= currentUser.username %>!</h2>
+        <p><strong>Your Profession:</strong> <%= currentUser.profession || "Not set" %></p>
+        <p><strong>Your Location:</strong> <%= currentUser.location || "Not set" %></p>
+
+        <h3>Available Users to Chat:</h3>
+        <div class="user-list">
+            <% users.forEach(user => { %>
+                <div class="user-card">
+                    <img src="<%= user.avatar || '/default-avatar.png' %>" alt="Avatar">
+                    <div class="user-info">
+                        <strong><%= user.username %></strong><br>
+                        <small><%= user.profession || "No profession" %>, <%= user.location || "No location" %></small>
+                    </div>
+                    <form action="/startchat" method="POST">
+                        <input type="hidden" name="to" value="<%= user._id %>">
+                        <button type="submit" class="chat-btn">Chat</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+
+        <form action="/logout" method="GET" class="logout-btn">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

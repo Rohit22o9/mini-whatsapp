@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with <%= otherUser.username %> | Mini WhatsApp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Chat with <%= otherUser.username %></h2>
+
+        <div class="chat-box" id="chatBox">
+    <% chats.forEach(chat => { %>
+        <div class="<%= chat.from.toString() === currentUser._id.toString() ? 'chat-right' : 'chat-left' %>" data-id="<%= chat._id %>">
+            <p>
+                <strong>
+                    <%= chat.from.toString() === currentUser._id.toString() ? 'You' : otherUser.username %>:
+                </strong> 
+                <%= chat.msg %>
+            </p>
+            <span class="timestamp">
+                <%= new Date(chat.created_at).toLocaleString() %>
+                <% if (chat.from.toString() === currentUser._id.toString()) { %>
+                    <% if (chat.status === 'seen') { %>
+                        ✓✓
+                    <% } else if (chat.status === 'delivered') { %>
+                        ✓✓
+                    <% } else { %>
+                        ✓
+                    <% } %>
+                <% } %>
+            </span>
+        </div>
+    <% }) %>
+</div>
+
+
+        <form action="/chat/<%= otherUser._id %>" method="POST" class="chat-form">
+            <input type="text" name="msg" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+
+        <form action="/dashboard" method="GET" style="margin-top: 20px;">
+            <button type="submit">Back to Users</button>
+        </form>
+    </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const currentUserId = "<%= currentUser._id %>";
+    const otherUserId = "<%= otherUser._id %>";
+    const roomId = [currentUserId, otherUserId].sort().join('_');
+    const chatBox = document.getElementById('chatBox');
+
+    socket.emit('joinRoom', roomId);
+
+    // Send seen status when page loads
+    socket.emit('messages seen', {
+        from: otherUserId,
+        to: currentUserId
+    });
+
+    const form = document.querySelector('.chat-form');
+    const input = form.querySelector('input[name="msg"]');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (msg) {
+            socket.emit('chat message', {
+                roomId,
+                from: currentUserId,
+                to: otherUserId,
+                msg
+            });
+            input.value = '';
+        }
+    });
+
+    // Render incoming message
+    socket.on('chat message', (data) => {
+        const div = document.createElement('div');
+        div.className = data.from === currentUserId ? 'chat-right' : 'chat-left';
+        div.setAttribute('data-id', data._id);
+
+        let tick = '';
+        if (data.from === currentUserId) {
+            if (data.status === 'seen') tick = '✓✓';
+            else if (data.status === 'delivered') tick = '✓✓';
+            else tick = '✓';
+        }
+
+        div.innerHTML = `
+            <p><strong>${data.from === currentUserId ? 'You' : '<%= otherUser.username %>'}:</strong> ${data.msg}</p>
+            <span class="timestamp">${new Date().toLocaleString()} ${tick}</span>
+        `;
+
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Notify server the message was delivered
+        if (data.to === currentUserId) {
+            socket.emit('message delivered', {
+                messageId: data._id
+            });
+        }
+    });
+
+    // Update message status to seen visually
+    socket.on('messages seen', ({ from }) => {
+        const messages = chatBox.querySelectorAll('.chat-right');
+        messages.forEach(msgEl => {
+            const ts = msgEl.querySelector('.timestamp');
+            if (ts && ts.innerText.includes('✓')) {
+                ts.innerText = ts.innerText.replace(/✓+/, '✓✓');
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
