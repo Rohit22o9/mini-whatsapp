@@ -158,6 +158,7 @@ io.on('connection', (socket) => {
     
 
     socket.on('messages seen', async (data) => {
+    try {
         await Chat.updateMany({
             from: data.to,
             to: data.from,
@@ -165,7 +166,19 @@ io.on('connection', (socket) => {
         }, {
             $set: { status: 'seen' }
         });
-    });
+
+        // Emit to the sender so their ticks turn blue
+        const roomId = [data.to, data.from].sort().join('_');
+        io.to(roomId).emit('messages seen', {
+            from: data.to,
+            to: data.from
+        });
+
+    } catch (err) {
+        console.error('Error updating seen messages:', err);
+    }
+});
+
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
