@@ -20,18 +20,19 @@
             </p>
             <span class="timestamp">
                 <%= new Date(chat.created_at).toLocaleString() %>
-                <% if (chat.from.toString() === currentUser._id.toString()) { %>
-                    <span class="tick <%= chat.status === 'seen' ? 'seen' : '' %>">
-                        <% if (chat.status === 'seen' || chat.status === 'delivered') { %>
-                            ✓✓
+                    <% if (chat.from.toString() === currentUser._id.toString()) { %>
+                        <% if (chat.status === 'seen') { %>
+                            <span class="tick seen">✓✓</span>
+                        <% } else if (chat.status === 'delivered') { %>
+                            <span class="tick delivered">✓✓</span>
                         <% } else { %>
-                            ✓
+                        <span class="tick sent">✓</span>
                         <% } %>
-                    </span>
                 <% } %>
             </span>
+
         </div>
-    <% }) %>
+    <% }) %>                                                                
 </div>
 
 

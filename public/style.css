@@ -90,6 +90,24 @@ body {
     gap: 10px;
 }
 
+.tick {
+  margin-left: 8px;
+}
+
+.tick.sent {
+  color: gray;
+}
+
+.tick.delivered {
+  color: gray;
+}
+
+.tick.seen {
+  color: blue;
+  font-weight: bold;
+}
+
+
 .chat-left, .chat-right {
     max-width: 60%;
     padding: 10px;
